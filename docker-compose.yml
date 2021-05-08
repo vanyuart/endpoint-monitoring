@@ -8,7 +8,9 @@ services:
     expose:
       - 8080
     environment:
-      MYSQL_HOST: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/endpointmonitoring
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pass
     networks:
       - app-db
     depends_on:

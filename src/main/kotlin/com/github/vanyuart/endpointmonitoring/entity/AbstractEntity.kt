@@ -9,7 +9,7 @@ abstract class AbstractEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
+    var id: Long = 0,
 
     @Column(nullable = false, updatable = false)
     var createdDate: ZonedDateTime = ZonedDateTime.now(),

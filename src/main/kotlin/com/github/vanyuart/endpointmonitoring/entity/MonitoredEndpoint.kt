@@ -15,7 +15,7 @@ class MonitoredEndpoint(
     /**
      * In seconds
      */
-    var monitoredInterval: Int,
+    var monitoringInterval: Int,
 
     @ManyToOne
     var owner: User,

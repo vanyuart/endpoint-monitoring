@@ -6,10 +6,6 @@ import javax.persistence.*
 @Table(name = "endpointmonitor_user")
 class User(
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
-
     @Column(unique = true, nullable = false)
     var username: String,
 
@@ -18,4 +14,7 @@ class User(
 
     @Column
     var accessToken: String? = null,
-)
+
+    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var endpoints: MutableList<MonitoredEndpoint> = mutableListOf()
+) : AbstractEntity()

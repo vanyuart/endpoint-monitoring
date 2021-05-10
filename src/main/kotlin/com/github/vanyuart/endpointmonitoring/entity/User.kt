@@ -9,6 +9,9 @@ class User(
     @Column(unique = true, nullable = false)
     var username: String,
 
+    @Column(nullable = false)
+    var password: String,
+
     @Column
     var email: String? = null,
 

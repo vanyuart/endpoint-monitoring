@@ -5,7 +5,8 @@ import com.github.vanyuart.endpointmonitoring.entity.User
 import com.github.vanyuart.endpointmonitoring.repository.MonitoredEndpointRepository
 import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
 import org.springframework.stereotype.Service
-import javax.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
+
 
 @Service
 @Transactional

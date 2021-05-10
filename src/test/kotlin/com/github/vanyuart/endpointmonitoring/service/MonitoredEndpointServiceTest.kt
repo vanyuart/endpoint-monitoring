@@ -21,7 +21,8 @@ constructor(
     @Test
     fun `Test user can create endpoint`() {
         var user = User(
-            username = "test"
+            username = "test",
+            password = "test",
         )
         user = userRepository.save(user)
 

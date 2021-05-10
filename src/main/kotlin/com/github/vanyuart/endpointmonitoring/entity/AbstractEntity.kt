@@ -14,6 +14,6 @@ abstract class AbstractEntity(
     @Column(nullable = false, updatable = false)
     var createdDate: ZonedDateTime = ZonedDateTime.now(),
 
-    @Column(nullable = false)
+    @Column
     var changedDate: ZonedDateTime? = null,
 ) : Serializable

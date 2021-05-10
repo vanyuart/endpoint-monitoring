@@ -20,6 +20,6 @@ class MonitoredEndpoint(
     @ManyToOne
     var owner: User,
 
-    @OneToMany(mappedBy = "endpoint", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "endpoint", orphanRemoval = true)
     var monitoringResults: MutableList<MonitoringResult> = mutableListOf()
 ) : AbstractEntity()

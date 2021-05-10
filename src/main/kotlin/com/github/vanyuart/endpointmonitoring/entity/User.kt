@@ -15,6 +15,6 @@ class User(
     @Column
     var accessToken: String? = null,
 
-    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "owner", orphanRemoval = true)
     var endpoints: MutableList<MonitoredEndpoint> = mutableListOf()
 ) : AbstractEntity()

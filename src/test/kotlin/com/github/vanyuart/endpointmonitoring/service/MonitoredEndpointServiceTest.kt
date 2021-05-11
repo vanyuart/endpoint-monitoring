@@ -16,7 +16,7 @@ constructor(
     private val monitoredEndpointService: MonitoredEndpointService,
     private val userRepository: UserRepository,
 ) {
-    private val ENDPOINT_NAME = "testEnpoint"
+    private val ENDPOINT_NAME = "testEndpoint"
 
     @Test
     fun `Test user can create endpoint`() {

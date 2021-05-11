@@ -22,7 +22,7 @@ constructor(
     fun `Test user can create endpoint`() {
         var user = User(
             username = "test",
-            password = "test",
+            accessToken = "test",
         )
         user = userRepository.save(user)
 

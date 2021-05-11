@@ -9,14 +9,11 @@ class User(
     @Column(unique = true, nullable = false)
     var username: String,
 
-    @Column(nullable = false)
-    var password: String,
-
     @Column
     var email: String? = null,
 
     @Column
-    var accessToken: String? = null,
+    var accessToken: String,
 
     @OneToMany(mappedBy = "owner", orphanRemoval = true)
     var endpoints: MutableList<MonitoredEndpoint> = mutableListOf()

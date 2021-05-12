@@ -16,9 +16,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfig(
     private val userDetailsService: UserDetailsServiceImpl,
-    private val uUIDAuthenticationFilter: UUIDAuthenticationFilter,
-    private val authenticationEntryPointImpl: AuthenticationEntryPointImpl,
 ) : WebSecurityConfigurerAdapter() {
+
+    @Bean
+    fun uUIDAuthenticationFilter(): UUIDAuthenticationFilter = UUIDAuthenticationFilter(userDetailsService)
+
+    @Bean
+    fun authenticationEntryPoint(): AuthenticationEntryPoint = AuthenticationEntryPointImpl()
 
     // configure Spring Security to use custom implementation of UserDetailsService
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
@@ -27,11 +31,11 @@ class SecurityConfig(
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(authenticationEntryPointImpl).and()
+            .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().anyRequest().authenticated()
 
         // add custom UUID authentication filter to the chain
-        http.addFilterBefore(uUIDAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+        http.addFilterBefore(uUIDAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
     }
 }

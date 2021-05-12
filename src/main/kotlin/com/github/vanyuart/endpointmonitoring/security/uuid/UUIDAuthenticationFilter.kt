@@ -22,7 +22,6 @@ private const val BEARER_TOKEN = "Bearer "
  * If token is present then there will be an attempt to find with same [User.accessToken].
  * If user found it fills security context.
  */
-@Component
 class UUIDAuthenticationFilter(
     private val userDetailsService: UserDetailsService,
 ) : OncePerRequestFilter() {

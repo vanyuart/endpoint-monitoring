@@ -9,5 +9,5 @@ data class MonitoredEndpointDto(
     val monitoringInterval: Int,
     val ownerId: Long,
     val createdDate: ZonedDateTime,
-    val changedDate: ZonedDateTime? = null,
+    val changedDate: ZonedDateTime?,
 )

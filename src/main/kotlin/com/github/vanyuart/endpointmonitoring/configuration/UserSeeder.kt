@@ -17,9 +17,9 @@ class UserSeeder(
     @Value("\${endpointmonitoring.seed.user.accessToken}")
     private val accessToken: String,
 
-    @Value("\${endpointmonitoring.seed.user.username}")
+    @Value("\${endpointmonitoring.seed.user2.username}")
     private val username2: String,
-    @Value("\${endpointmonitoring.seed.user.accessToken}")
+    @Value("\${endpointmonitoring.seed.user2.accessToken}")
     private val accessToken2: String,
 ) {
     private val log by logger()

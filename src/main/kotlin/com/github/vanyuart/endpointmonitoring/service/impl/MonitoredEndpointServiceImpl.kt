@@ -46,7 +46,7 @@ class MonitoredEndpointServiceImpl(
         val endpoint = getEndpointById(id, owner)
         if (name != null) endpoint.name = name
         if (url != null) endpoint.url = url
-        if (monitoringInterval != null) endpoint.monitoringInterval
+        if (monitoringInterval != null) endpoint.monitoringInterval = monitoringInterval
         monitoredEndpointRepository.save(endpoint)
     }
 

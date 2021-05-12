@@ -27,7 +27,7 @@ interface MonitoredEndpointService {
      * @throws [NotFoundException] if endpoint does not exist
      * @throws [NotAllowedException] if user cannot edit given endpoint
      */
-    fun updateMonitoredEndpoint(id: Long, name: String? = null, url: String? = null, monitoringInterval: Int? = null, owner: User)
+    fun updateMonitoredEndpoint(id: Long, name: String?, url: String?, monitoringInterval: Int?, owner: User)
 
     /**
      * Delete endpoint by ID

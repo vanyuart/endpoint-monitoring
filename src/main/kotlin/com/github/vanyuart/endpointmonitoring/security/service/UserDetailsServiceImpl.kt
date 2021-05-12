@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UserDetailsServiceImpl(
     private val userRepository: UserRepository,
-): UserDetailsService {
+) : UserDetailsService {
 
     /**
      * For the sake of simplicity seeded user will be found by accessToken

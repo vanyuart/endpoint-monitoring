@@ -20,7 +20,7 @@ class MonitoredEndpointServiceImpl(
     @Transactional(readOnly = true)
     override fun getEndpointById(id: Long, user: User): MonitoredEndpoint {
         val endpoint = monitoredEndpointRepository.findByIdOrNull(id)
-            ?: throw NotFoundException.create(MonitoredEndpoint::javaClass.name, id)
+            ?: throw NotFoundException.create(MonitoredEndpoint::class.simpleName, id)
 
         if (endpoint.owner.id != user.id) throw NotAllowedException.create(MonitoredEndpoint::javaClass.name, id)
 

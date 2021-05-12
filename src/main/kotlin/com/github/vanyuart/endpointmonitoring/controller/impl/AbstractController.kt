@@ -21,6 +21,6 @@ abstract class AbstractController {
         val context = SecurityContextHolder.getContext()
         val userDetails = context?.authentication?.principal as UserDetails
         return userRepository.findByUsername(userDetails.username)
-            ?: throw NotFoundException.create(User::javaClass.name, userDetails.username)
+            ?: throw NotFoundException.create(User::class.simpleName, userDetails.username)
     }
 }

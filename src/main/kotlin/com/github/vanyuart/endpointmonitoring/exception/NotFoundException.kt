@@ -5,7 +5,7 @@ package com.github.vanyuart.endpointmonitoring.exception
  */
 class NotFoundException(message: String) : Exception(message) {
     companion object {
-        fun create(resourceName: String, identifier: Any) =
+        fun create(resourceName: String?, identifier: Any) =
             NotFoundException("$resourceName identified by $identifier not found.")
     }
 }

@@ -2,11 +2,10 @@ package com.github.vanyuart.endpointmonitoring.service
 
 import com.github.vanyuart.endpointmonitoring.entity.MonitoredEndpoint
 import com.github.vanyuart.endpointmonitoring.entity.MonitoringResult
-import java.time.ZonedDateTime
 
 interface MonitoringResultService {
 
-    fun save(statusCode: Int, payload: String, dateOfCheck: ZonedDateTime, endpoint: MonitoredEndpoint)
+    fun save(monitoringResult: MonitoringResult)
 
     /**
      * @return last 10 [MonitoringResult] for [MonitoredEndpoint]

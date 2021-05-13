@@ -20,4 +20,8 @@ class TestControllerImpl: TestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     override fun getOk() {}
+
+    @GetMapping("payload")
+    @ResponseStatus(HttpStatus.OK)
+    override fun getWithPayload(): String = "Test payload."
 }

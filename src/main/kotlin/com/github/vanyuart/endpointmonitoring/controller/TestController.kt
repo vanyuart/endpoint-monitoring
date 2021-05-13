@@ -17,4 +17,9 @@ interface TestController {
      * Return [HttpStatus.OK] immediately
      */
     fun getOk()
+
+    /**
+     * Return [HttpStatus.OK] with payload
+     */
+    fun getWithPayload(): String
 }

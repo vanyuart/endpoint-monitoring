@@ -26,12 +26,13 @@ class MonitoredEndpointServiceImpl(
         return monitoredEndpointRepository.findAllByNextCheckIsNullOrNextCheckDateBefore(ZonedDateTime.now())
     }
 
-    override fun updateNextCheckDate(id: Long) {
+    override fun updateNextCheckDate(id: Long, lastCheckDate: ZonedDateTime) {
         val endpoint = monitoredEndpointRepository.findByIdOrNull(id)
         if (endpoint == null) {
             log.error("Endpoint with id=${id} does not exists after check.")
             return
         }
+        endpoint.lastCheckDate = lastCheckDate
         endpoint.nextCheckDate = ZonedDateTime.now().plusSeconds(endpoint.monitoringInterval.toLong())
         monitoredEndpointRepository.save(endpoint)
     }

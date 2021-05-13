@@ -5,6 +5,7 @@ import com.github.vanyuart.endpointmonitoring.entity.User
 import com.github.vanyuart.endpointmonitoring.exception.NotAllowedException
 import com.github.vanyuart.endpointmonitoring.exception.NotFoundException
 import com.github.vanyuart.endpointmonitoring.scheduled.EndpointCheckerScheduledTask
+import java.time.ZonedDateTime
 
 interface MonitoredEndpointService {
 
@@ -15,8 +16,9 @@ interface MonitoredEndpointService {
 
     /**
      * Fetch endpoint and set the date of next check
+     * @param date of the last check
      */
-    fun updateNextCheckDate(id: Long)
+    fun updateNextCheckDate(id: Long, lastCheckDate: ZonedDateTime)
 
     /**
      * Get endpoint by ID

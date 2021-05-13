@@ -10,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.ZonedDateTime
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -18,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap
  * Here with only one scheduled task this should be sufficient.
  *
  * This task uses Fuel Http Client to asynchronously send http request using Kotlin coroutines.
+ * Results then added to a concurrent map and later stored.
  */
 @Component
 class EndpointCheckerScheduledTask(

@@ -6,6 +6,7 @@ import com.github.vanyuart.endpointmonitoring.exception.NotAllowedException
 import com.github.vanyuart.endpointmonitoring.exception.NotFoundException
 import com.github.vanyuart.endpointmonitoring.repository.MonitoredEndpointRepository
 import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
+import com.github.vanyuart.endpointmonitoring.util.logger
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,9 +19,21 @@ class MonitoredEndpointServiceImpl(
     private val monitoredEndpointRepository: MonitoredEndpointRepository
 ) : MonitoredEndpointService {
 
+    private val log by logger()
+
     @Transactional(readOnly = true)
-    override fun getEndpointsForCheck(): List<MonitoredEndpoint> {
-        return monitoredEndpointRepository.findAll()
+    override fun getEndpointsForNextCheck(): List<MonitoredEndpoint> {
+        return monitoredEndpointRepository.findAllByNextCheckIsNullOrNextCheckDateBefore(ZonedDateTime.now())
+    }
+
+    override fun updateNextCheckDate(id: Long) {
+        val endpoint = monitoredEndpointRepository.findByIdOrNull(id)
+        if (endpoint == null) {
+            log.error("Endpoint with id=${id} does not exists after check.")
+            return
+        }
+        endpoint.nextCheckDate = ZonedDateTime.now().plusSeconds(endpoint.monitoringInterval.toLong())
+        monitoredEndpointRepository.save(endpoint)
     }
 
     @Transactional(readOnly = true)

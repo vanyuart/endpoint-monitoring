@@ -2,8 +2,21 @@ package com.github.vanyuart.endpointmonitoring.service
 
 import com.github.vanyuart.endpointmonitoring.entity.MonitoredEndpoint
 import com.github.vanyuart.endpointmonitoring.entity.User
+import com.github.vanyuart.endpointmonitoring.exception.NotAllowedException
+import com.github.vanyuart.endpointmonitoring.exception.NotFoundException
+import com.github.vanyuart.endpointmonitoring.scheduled.EndpointCheckerScheduledTask
 
 interface MonitoredEndpointService {
+
+    /**
+     * Get endpoints eligible for the next check in [EndpointCheckerScheduledTask]
+     */
+    fun getEndpointsForNextCheck(): List<MonitoredEndpoint>
+
+    /**
+     * Fetch endpoint and set the date of next check
+     */
+    fun updateNextCheckDate(id: Long)
 
     /**
      * Get endpoint by ID

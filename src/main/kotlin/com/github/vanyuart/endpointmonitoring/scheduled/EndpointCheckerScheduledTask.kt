@@ -34,7 +34,7 @@ class EndpointCheckerScheduledTask(
             log.info("GET: ${endpoint.url}")
             endpoint.url.httpGet().response { request, response, result ->
 
-                log.info("${response.statusCode} - ${endpoint.url}")
+                log.info("name=${endpoint.name} statusCode=${response.statusCode} url=${endpoint.url}")
 
                 monitoringResultService.save(
                     statusCode = response.statusCode,

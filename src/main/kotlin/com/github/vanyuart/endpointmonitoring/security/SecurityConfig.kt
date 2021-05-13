@@ -34,7 +34,9 @@ class SecurityConfig(
         http.csrf().disable()
             .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().anyRequest().authenticated()
+            .authorizeRequests()
+            .antMatchers("/test/**").permitAll()
+            .anyRequest().authenticated()
 
         // add custom UUID authentication filter to the chain
         http.addFilterBefore(uUIDAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)

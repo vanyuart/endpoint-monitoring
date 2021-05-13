@@ -5,6 +5,9 @@ import com.github.vanyuart.endpointmonitoring.entity.MonitoringResult
 
 interface MonitoringResultService {
 
+    /**
+     * Store [MonitoringResult]
+     */
     fun save(monitoringResult: MonitoringResult)
 
     /**

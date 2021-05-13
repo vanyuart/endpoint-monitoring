@@ -1,8 +1,10 @@
 package com.github.vanyuart.endpointmonitoring.dto
 
 import com.github.vanyuart.endpointmonitoring.dto.type.MonitoredEndpointDto
+import com.github.vanyuart.endpointmonitoring.dto.type.MonitoringResultDto
 import com.github.vanyuart.endpointmonitoring.dto.type.UserDto
 import com.github.vanyuart.endpointmonitoring.entity.MonitoredEndpoint
+import com.github.vanyuart.endpointmonitoring.entity.MonitoringResult
 import com.github.vanyuart.endpointmonitoring.entity.User
 
 fun User.toDTO() = UserDto(
@@ -17,4 +19,11 @@ fun MonitoredEndpoint.toDTO() = MonitoredEndpointDto(
     ownerId = owner.id,
     createdDate = createdDate,
     changedDate = changedDate,
+)
+
+fun MonitoringResult.toDTO() = MonitoringResultDto(
+    statusCode = statusCode,
+    payload = payload,
+    dateOfCheck = dateOfCheck,
+    endpointId = endpoint.id,
 )

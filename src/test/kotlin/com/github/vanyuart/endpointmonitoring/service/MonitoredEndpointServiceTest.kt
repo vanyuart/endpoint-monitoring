@@ -22,11 +22,11 @@ constructor(
     private val ENDPOINT_NAME = "testEndpoint"
 
     @Test
-    fun `Test user can create endpoint`() {
+    fun `User can create endpoint`() {
         var user = User(username = "test", accessToken = "test")
         user = userRepository.save(user)
 
-        // user does not have endpoints
+        // assert user does not have endpoints
         var userEndpoints = monitoredEndpointService.getEndpointsByUser(user)
         assertEquals(0, userEndpoints.size)
 
@@ -45,14 +45,14 @@ constructor(
     }
 
     @Test
-    fun `Test user can only access owned endpoint`() {
+    fun `User can only access owned endpoint`() {
         var user = User(username = "test", accessToken = "test")
         user = userRepository.save(user)
 
         var otherUser = User(username = "test2", accessToken = "test2")
         otherUser = userRepository.save(otherUser)
 
-        // create endpoint
+        // create endpoint for a user
         monitoredEndpointService.createMonitoredEndpoint(
             name = ENDPOINT_NAME,
             url = "https://test.com",
@@ -60,7 +60,7 @@ constructor(
             owner = user
         )
 
-        // try to get endpoint by id with another user
+        // attempt to get endpoint by id with another user throws exception
         val endpointId = monitoredEndpointService.getEndpointsByUser(user)[0].id
         assertThrows(NotAllowedException::class.java) {
             monitoredEndpointService.getEndpointById(endpointId, otherUser)

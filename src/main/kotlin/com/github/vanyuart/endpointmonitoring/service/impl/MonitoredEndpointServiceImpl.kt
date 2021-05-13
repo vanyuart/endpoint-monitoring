@@ -23,7 +23,7 @@ class MonitoredEndpointServiceImpl(
 
     @Transactional(readOnly = true)
     override fun getEndpointsForNextCheck(): List<MonitoredEndpoint> {
-        return monitoredEndpointRepository.findAllByNextCheckIsNullOrNextCheckDateBefore(ZonedDateTime.now())
+        return monitoredEndpointRepository.findAllByNextCheckDateIsNullOrNextCheckDateBefore(ZonedDateTime.now())
     }
 
     override fun updateNextCheckDate(id: Long, lastCheckDate: ZonedDateTime) {
@@ -67,7 +67,13 @@ class MonitoredEndpointServiceImpl(
         val endpoint = getEndpointById(id, owner)
         if (name != null) endpoint.name = name
         if (url != null) endpoint.url = url
-        if (monitoringInterval != null) endpoint.monitoringInterval = monitoringInterval
+        if (monitoringInterval != null) {
+            // update next check time if monitoringInterval changed
+            if (monitoringInterval != endpoint.monitoringInterval) {
+                endpoint.nextCheckDate = ZonedDateTime.now().plusSeconds(monitoringInterval.toLong())
+            }
+            endpoint.monitoringInterval = monitoringInterval
+        }
         monitoredEndpointRepository.save(endpoint)
     }
 

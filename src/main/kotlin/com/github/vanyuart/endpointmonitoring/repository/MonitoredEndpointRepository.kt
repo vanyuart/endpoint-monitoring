@@ -7,5 +7,5 @@ import java.time.ZonedDateTime
 
 interface MonitoredEndpointRepository : JpaRepository<MonitoredEndpoint, Long> {
     fun findAllByOwner(owner: User): List<MonitoredEndpoint>
-    fun findAllByNextCheckIsNullOrNextCheckDateBefore(beforeDate: ZonedDateTime): List<MonitoredEndpoint>
+    fun findAllByNextCheckDateIsNullOrNextCheckDateBefore(nextCheckDateBefore: ZonedDateTime): List<MonitoredEndpoint>
 }

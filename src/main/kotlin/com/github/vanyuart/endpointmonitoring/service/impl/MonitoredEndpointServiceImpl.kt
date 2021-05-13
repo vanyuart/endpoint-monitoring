@@ -9,6 +9,7 @@ import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.ZonedDateTime
 
 
 @Service
@@ -16,6 +17,11 @@ import org.springframework.transaction.annotation.Transactional
 class MonitoredEndpointServiceImpl(
     private val monitoredEndpointRepository: MonitoredEndpointRepository
 ) : MonitoredEndpointService {
+
+    @Transactional(readOnly = true)
+    override fun getEndpointsForCheck(): List<MonitoredEndpoint> {
+        return monitoredEndpointRepository.findAll()
+    }
 
     @Transactional(readOnly = true)
     override fun getEndpointById(id: Long, user: User): MonitoredEndpoint {
@@ -37,7 +43,8 @@ class MonitoredEndpointServiceImpl(
             name = name,
             url = url,
             monitoringInterval = monitoringInterval,
-            owner = owner
+            owner = owner,
+            nextCheckDate = ZonedDateTime.now().plusSeconds(monitoringInterval.toLong())
         )
         monitoredEndpointRepository.save(monitoredEndpoint)
     }

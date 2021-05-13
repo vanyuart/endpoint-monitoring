@@ -9,10 +9,10 @@ import javax.persistence.ManyToOne
 class MonitoringResult(
 
     /**
-     * Status code will be null if there will be an exception during check
+     * Status code will be -1 if there will be an exception during check
      */
-    @Column
-    var statusCode: Int?,
+    @Column(nullable = false)
+    var statusCode: Int,
 
     /**
      * Response body or exception message

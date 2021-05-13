@@ -8,9 +8,6 @@ import javax.persistence.ManyToOne
 @Entity
 class MonitoringResult(
 
-    @Column(nullable = false)
-    var dateOfCheck: ZonedDateTime,
-
     /**
      * Status code will be null if there will be an exception during check
      */
@@ -22,6 +19,9 @@ class MonitoringResult(
      */
     @Column(nullable = false)
     var payload: String,
+
+    @Column(nullable = false)
+    var dateOfCheck: ZonedDateTime,
 
     @ManyToOne
     var endpoint: MonitoredEndpoint

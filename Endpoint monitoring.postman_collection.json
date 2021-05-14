@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "17922673-d7bb-4d60-abf8-ba92e0d315de",
+		"name": "Endpoint monitoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "endpoints",
+			"item": [
+				{
+					"name": "Get all user endpoints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/endpoints",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"endpoints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user endpoint by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/endpoints/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"endpoints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create endpoint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Beer?\",\r\n    \"url\": \"https://random-data-api.com/api/beer/random_beer\",\r\n    \"monitoringInterval\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/endpoints",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"endpoints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update endpoint",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Beer!\",\r\n    \"url\": \"https://random-data-api.com/api/beer/random_beer\",\r\n    \"monitoringInterval\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/endpoints",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"endpoints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete endpoint by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/endpoints/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"endpoints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "monitoring",
+			"item": [
+				{
+					"name": "results",
+					"item": [
+						{
+							"name": "Get last 10 results for endpointId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}/monitoring/results/1",
+									"host": [
+										"{{api}}"
+									],
+									"path": [
+										"monitoring",
+										"results",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "Get a teapot after 5 sec",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/test/teapot",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"test",
+								"teapot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/test",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OK with payload",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/test/payload",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"test",
+								"payload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get current user username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/users/current",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "dcb20f8a-5657-4f1b-9f7f-ce65739b359e",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "localhost:8081"
+		}
+	]
+}

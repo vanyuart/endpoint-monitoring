@@ -8,6 +8,7 @@ import com.github.vanyuart.endpointmonitoring.dto.type.MonitoredEndpointDto
 import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("endpoints")
@@ -25,7 +26,7 @@ class MonitoredEndpointControllerImpl(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    override fun createEndpoint(@RequestBody req: CreateMonitoredEndpointReq) =
+    override fun createEndpoint(@Valid @RequestBody req: CreateMonitoredEndpointReq) =
         monitoredEndpointService.createMonitoredEndpoint(
             name = req.name,
             url = req.url,
@@ -35,7 +36,7 @@ class MonitoredEndpointControllerImpl(
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    override fun updateEndpoint(@RequestBody req: UpdateMonitoredEndpointReq) =
+    override fun updateEndpoint(@Valid @RequestBody req: UpdateMonitoredEndpointReq) =
         monitoredEndpointService.updateMonitoredEndpoint(
             id = req.id,
             name = req.name,

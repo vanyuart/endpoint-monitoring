@@ -7,9 +7,11 @@ import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
 import com.github.vanyuart.endpointmonitoring.service.MonitoringResultService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RestController("monitoring/results")
+@RestController
+@RequestMapping("monitoring/results")
 class MonitoringResultControllerImpl(
     private val monitoringResultService: MonitoringResultService,
     private val monitoredEndpointService: MonitoredEndpointService,

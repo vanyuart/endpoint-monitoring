@@ -1,11 +1,13 @@
 package com.github.vanyuart.endpointmonitoring.scheduled
 
+import com.github.kittinunf.fuel.coroutines.awaitStringResponseResult
 import com.github.kittinunf.fuel.httpGet
 import com.github.vanyuart.endpointmonitoring.entity.MonitoredEndpoint
 import com.github.vanyuart.endpointmonitoring.entity.MonitoringResult
 import com.github.vanyuart.endpointmonitoring.service.MonitoredEndpointService
 import com.github.vanyuart.endpointmonitoring.service.MonitoringResultService
 import com.github.vanyuart.endpointmonitoring.util.logger
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -31,28 +33,37 @@ class EndpointCheckerScheduledTask(
         log.info("EndpointCheckerScheduledTask started")
 
         val endpoints: List<MonitoredEndpoint> = monitoredEndpointService.getEndpointsForNextCheck()
-        val monitoringResults = ConcurrentHashMap<MonitoredEndpoint, MonitoringResult>()
+        val endpointResultMap = ConcurrentHashMap<MonitoredEndpoint, MonitoringResult>()
         val dateOfCheck = ZonedDateTime.now()
 
-        endpoints.forEach { endpoint ->
-            log.info("GET: ${endpoint.url}")
-
-            endpoint.url.httpGet().response { request, response, result ->
-                log.info("name=${endpoint.name} statusCode=${response.statusCode} url=${endpoint.url}")
-
-                monitoringResults[endpoint] = MonitoringResult(
-                    statusCode = response.statusCode,
-                    payload = response.responseMessage,
-                    dateOfCheck = dateOfCheck,
-                    endpoint = endpoint
-                )
+        // await for all requests
+        coroutineScope {
+            endpoints.forEach { endpoint ->
+                val result = fetchUrl(endpoint, dateOfCheck)
+                endpointResultMap[endpoint] = result
             }
         }
-        monitoringResults.forEach { monitoringResult ->
-            monitoringResultService.save(monitoringResult.value)
-            monitoredEndpointService.updateNextCheckDate(monitoringResult.key.id, dateOfCheck)
-        }
+        // bulk save results and update endpoint
+        monitoringResultService.bulkSave(endpointResultMap.values)
+        monitoredEndpointService.bulkUpdateNextCheckDate(endpoints.map { it.id }, dateOfCheck)
 
         log.info("EndpointCheckerScheduledTask finished.")
+    }
+
+    /**
+     * Send async request to monitored endpoint
+     */
+    private suspend fun fetchUrl(endpoint: MonitoredEndpoint, dateOfCheck: ZonedDateTime): MonitoringResult {
+        log.info("GET: ${endpoint.url}")
+
+        val (request, response, result) = endpoint.url.httpGet().awaitStringResponseResult()
+        log.info("name=${endpoint.name} statusCode=${response.statusCode} url=${endpoint.url} payload=${String(response.data)}")
+
+        return MonitoringResult(
+            statusCode = response.statusCode,
+            payload = String(response.data),
+            dateOfCheck = dateOfCheck,
+            endpoint = endpoint
+        )
     }
 }

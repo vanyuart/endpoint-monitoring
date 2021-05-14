@@ -11,8 +11,8 @@ class MonitoringResultServiceImpl(
     private val monitoringResultRepository: MonitoringResultRepository,
 ) : MonitoringResultService {
 
-    override fun save(monitoringResult: MonitoringResult) {
-        monitoringResultRepository.save(monitoringResult)
+    override fun bulkSave(monitoringResults: MutableCollection<MonitoringResult>) {
+        monitoringResultRepository.saveAll(monitoringResults)
     }
 
     override fun getLast10MonitoringResults(endpoint: MonitoredEndpoint): List<MonitoringResult> =

@@ -15,10 +15,11 @@ interface MonitoredEndpointService {
     fun getEndpointsForNextCheck(): List<MonitoredEndpoint>
 
     /**
-     * Fetch endpoint and set the date of next check
-     * @param date of the last check
+     * Fetch endpoints and set the date of next check
+     * @param ids IDs of endpoints
+     * @param lastCheckDate of the last check
      */
-    fun updateNextCheckDate(id: Long, lastCheckDate: ZonedDateTime)
+    fun bulkUpdateNextCheckDate(ids: List<Long>, lastCheckDate: ZonedDateTime)
 
     /**
      * Get endpoint by ID

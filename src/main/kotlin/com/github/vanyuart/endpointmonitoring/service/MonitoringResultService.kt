@@ -6,9 +6,9 @@ import com.github.vanyuart.endpointmonitoring.entity.MonitoringResult
 interface MonitoringResultService {
 
     /**
-     * Store [MonitoringResult]
+     * Store all [MonitoringResult] at once
      */
-    fun save(monitoringResult: MonitoringResult)
+    fun bulkSave(monitoringResults: MutableCollection<MonitoringResult>)
 
     /**
      * @return last 10 [MonitoringResult] for [MonitoredEndpoint]

@@ -12,7 +12,7 @@ import javax.persistence.*
 abstract class AbstractEntity(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
 
     @Column(nullable = false, updatable = false)

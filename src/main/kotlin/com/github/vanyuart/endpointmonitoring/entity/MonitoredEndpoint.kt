@@ -27,6 +27,6 @@ class MonitoredEndpoint(
     @ManyToOne(fetch = FetchType.LAZY)
     var owner: User,
 
-    @OneToMany(mappedBy = "endpoint", orphanRemoval = true)
+    @OneToMany(mappedBy = "endpoint", cascade = [CascadeType.ALL], orphanRemoval = true)
     var monitoringResults: MutableList<MonitoringResult> = mutableListOf()
 ) : AbstractEntity()

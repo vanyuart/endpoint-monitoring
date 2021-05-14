@@ -37,7 +37,7 @@ class MonitoredEndpointServiceImpl(
         val endpoint = monitoredEndpointRepository.findByIdOrNull(id)
             ?: throw NotFoundException.create(MonitoredEndpoint::class.simpleName, id)
 
-        if (endpoint.owner.id != user.id) throw NotAllowedException.create(MonitoredEndpoint::javaClass.name, id)
+        if (endpoint.owner.id != user.id) throw NotAllowedException.create(MonitoredEndpoint::class.simpleName, id)
 
         return endpoint
     }

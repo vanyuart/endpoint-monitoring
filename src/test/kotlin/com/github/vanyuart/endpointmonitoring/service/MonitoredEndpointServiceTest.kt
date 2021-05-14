@@ -6,13 +6,17 @@ import com.github.vanyuart.endpointmonitoring.exception.NotFoundException
 import com.github.vanyuart.endpointmonitoring.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.TestPropertySource
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @TestPropertySource(locations = ["classpath:application-test.properties"])
+@Transactional
 class MonitoredEndpointServiceTest
 @Autowired
 constructor(

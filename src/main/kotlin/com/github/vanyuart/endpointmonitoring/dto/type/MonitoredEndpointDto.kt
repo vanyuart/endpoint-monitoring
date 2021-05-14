@@ -8,6 +8,7 @@ data class MonitoredEndpointDto(
     val url: String,
     val monitoringInterval: Int,
     val ownerId: Long,
+    val lastCheckDate: ZonedDateTime?,
     val createdDate: ZonedDateTime,
     val changedDate: ZonedDateTime?,
 )

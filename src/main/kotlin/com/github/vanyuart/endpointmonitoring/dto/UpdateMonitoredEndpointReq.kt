@@ -5,6 +5,8 @@ import javax.validation.constraints.Pattern
 import javax.validation.constraints.Positive
 
 data class UpdateMonitoredEndpointReq(
+
+    @field:Positive(message = RequestValidation.ID_MSG)
     val id: Long,
 
     @field:NotBlank(message = RequestValidation.ENDPOINT_NAME_MSG)

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface MonitoringResultRepository : JpaRepository<MonitoringResult, Long> {
-    fun findTop10ByEndpoint(endpoint: MonitoredEndpoint): List<MonitoringResult>
+    fun findTop10ByEndpointOrderByDateOfCheckDesc(endpoint: MonitoredEndpoint): List<MonitoringResult>
 }

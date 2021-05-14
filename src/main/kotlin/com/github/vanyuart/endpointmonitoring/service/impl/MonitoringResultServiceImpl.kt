@@ -16,5 +16,5 @@ class MonitoringResultServiceImpl(
     }
 
     override fun getLast10MonitoringResults(endpoint: MonitoredEndpoint): List<MonitoringResult> =
-        monitoringResultRepository.findTop10ByEndpoint(endpoint)
+        monitoringResultRepository.findTop10ByEndpointOrderByDateOfCheckDesc(endpoint)
 }

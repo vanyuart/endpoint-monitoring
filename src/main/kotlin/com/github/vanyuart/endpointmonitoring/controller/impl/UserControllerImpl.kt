@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController
 class UserControllerImpl : AbstractController(), UserController {
 
     @GetMapping("current")
-    override fun getCurrentUser(): UserDto = getCurrentUser().toDTO()
+    fun getLoggedUser(): UserDto = getLoggedUser().toDTO()
 }

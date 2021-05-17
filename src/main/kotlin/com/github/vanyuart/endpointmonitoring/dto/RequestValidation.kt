@@ -5,7 +5,7 @@ object RequestValidation {
 
     const val ENDPOINT_NAME_MSG = "Endpoint name should not be blank."
 
-    const val URL_PATTERN_MSG = "URL does not have valid format, e.g. 'http(s)://example.com'."
+    const val URL_PATTERN_MSG = "URL does not have valid format, e.g. 'http(s)://example.com', 'http(s)://localhost:8080/test'."
     const val URL_PATTERN_REGEX = "(?:^|[ \\t])((https?:\\/\\/)(?:localhost|[\\w-]+(?:\\.[\\w-]+)+)(:\\d+)?(\\/\\S*)?)"
 
     const val MONITORING_INTERVAL_MSG = "Monitoring interval should be greater than zero."

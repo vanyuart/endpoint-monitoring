@@ -17,6 +17,7 @@ fun MonitoredEndpoint.toDTO() = MonitoredEndpointDto(
     url = url,
     monitoringInterval = monitoringInterval,
     ownerId = owner.id,
+    lastCheckDate = lastCheckDate,
     createdDate = createdDate,
     changedDate = changedDate,
 )
